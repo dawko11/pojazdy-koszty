@@ -1,7 +1,7 @@
 # Pojazdy i koszty
 
 Aplikacja mobilna (Flutter) + REST API (FastAPI) + PostgreSQL + lokalny SQLite.  
-**Autorzy:** Anna Kaim, Dawid Miter.
+**Autorzy:** Anna Kaim 52699, Dawid Miter 52833.
 
 Pełny opis założeń, podziału zadań, API i schematu bazy: **[DOKUMENTACJA.md](DOKUMENTACJA.md)**.
 
