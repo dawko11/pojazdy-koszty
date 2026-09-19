@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: pojazdy
+      POSTGRES_PASSWORD: pojazdy
+      POSTGRES_DB: pojazdy_koszty
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pojazdy -d pojazdy_koszty"]
+      interval: 3s
+      timeout: 5s
+      retries: 20
+
+  api:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://pojazdy:pojazdy@db:5432/pojazdy_koszty
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-min-32-characters-xx}
+      ACCESS_TOKEN_EXPIRE_MINUTES: "10080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
